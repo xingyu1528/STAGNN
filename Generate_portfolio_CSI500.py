@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 import warnings
 warnings.filterwarnings("ignore")
 # from Agent_SL import GCN, SGFormer, TCN_Net
-from TGT import STConv
+from STAGNN import STConv
 from gen_data import gen_GNN_data
 plt.rcParams['font.sans-serif'] = ['SimHei']	# 显示中文
 plt.rcParams['axes.unicode_minus'] = False		# 显示负号
@@ -32,11 +32,11 @@ Gdata_list, split, max_value, min_value = gen_GNN_data()
 data_set = Gdata_list
 dataset_size = len(data_set)
 train_ratio = 0.15  # 训练集占的比例
-val_test_ratio = 0.76  # 验证集和测试集在剩余部分中的比例，验证集占一半
+val_test_ratio = 0.38  # 验证集和测试集在剩余部分中的比例，验证集占一半
 train_size = int(dataset_size * train_ratio)
 val_size = int(train_size * val_test_ratio)
-train_dataset = data_set[:-25]
-val_dataset = data_set[-24*2:-24]
+train_dataset = data_set[:-val_size]
+val_dataset = data_set[-val_size:]
 test_dataset = val_dataset
 print("Train size:", len(train_dataset))
 print("Validation size:", len(val_dataset))
